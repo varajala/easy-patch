@@ -1,0 +1,66 @@
+FILE: tests/examples/lorem-ipsum.txt
+FIND:
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Sed do eiusmod tempor incididunt ut labore.
+
+REPLACE WITH:
+Greetings and salutations!
+Welcome to our example text file.
+
+FIND:
+Excepteur sint occaecat cupidatat non proident.
+
+DELETE
+
+FILE: tests/examples/hello.py
+FIND:
+def greet(name: str = "World") -> str:
+    """A simple greeting function"""
+    return f"Hello, {name}!"
+
+REPLACE WITH:
+def greet(name: str = "World", greeting: str = "Hello") -> str:
+    """A customizable greeting function
+
+    Args:
+        name (str): Name to greet
+        greeting (str): Custom greeting to use
+    """
+    return f"{greeting}, {name}!"
+
+FIND:
+def main():
+
+ADD AFTER:
+    # Add some extra greetings
+    print(greet(greeting="Hi"))
+    print(greet("Everyone", "Good morning"))
+
+FILE: tests/examples/server.js
+FIND:
+const port = 3000;
+
+ADD AFTER:
+const greetings = ['Hello', 'Hi', 'Hey', 'Greetings'];
+
+FIND:
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+REPLACE WITH:
+app.get('/', (req, res) => {
+  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+  res.send(`${randomGreeting} World!`);
+});
+
+FIND:
+app.get('/about', (req, res) => {
+  res.send('About page');
+});
+
+ADD AFTER:
+app.get('/greet/:name', (req, res) => {
+  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+  res.send(`${randomGreeting} ${req.params.name}!`);
+});
